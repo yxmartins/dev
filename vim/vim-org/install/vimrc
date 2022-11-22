@@ -1,0 +1,22 @@
+#! /bin/bash
+
+# include needed configurations in the vimrc file
+printf "
+\"> Calendar-Vim
+\">> ctrl+up and ctrl+down to change month. < and > to change month
+    let g:calendar_keys = {
+        \'goto_next_month': '<c-down>',
+        \'goto_prev_month': '<c-up>',
+        \'goto_next_year': '<',
+        \'goto_prev_year': '>',
+        \}
+
+\"> Vimwiki
+\">> using Markdown syntax. defining \"$org_dir\" as an index page
+    g:vimwiki_list = [
+        \{ 'path': '$org_dir',
+        \  'syntax': 'markdown',
+        \  'ext': '.md' }
+        \]
+        " >> ~/.vim/vimrc
+

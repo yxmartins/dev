@@ -1,0 +1,24 @@
+#! /bin/bash
+
+# user directories
+
+
+# directory variables
+    index=$org_dir/index.md
+    diary_dir=$org_dir/diary
+    diary=$diary_dir/diary.md
+    todo=$diary_dir/todo.md
+
+# date variables
+    declare -A date
+    declare -A datefile
+    y=$(date +%Y) 
+
+    for m in {1..12}; do
+        for d in {1..31}; do
+            date[$m,$d]=$y'-'$m'-'$d
+            datefile[$m,$d]=${date[$m,$d]}.md
+        done
+    done
+
+

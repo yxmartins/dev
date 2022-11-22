@@ -1,0 +1,115 @@
+#! /bin/bash
+
+# front-end
+    printf "\nWelcome to the installation guide of Vim-Org.\n\n"
+    sleep 0.5
+
+    printf "Please, provide the directory where your organization files will be stored.\n"
+    printf "By default it is \"~/Org\".\n\n"
+    sleep 0.5
+    printf "If you want to use the default location, just hit [Enter].\n"
+    read org_dir
+    
+    if test -n "$org_dir"; then
+        sleep 0.5
+        printf "Great! We will use \"$org_dir\" as your org path.\n\n"
+    else
+        sleep 0.5
+        printf "Ok. We will use the default \"~/Org\" as your org path.\n\n"
+    fi
+
+    sleep 0.5
+    printf "Now, provide the directory where the script will be installed. \nBy default it is \"~/.config/vim-org\".\n\n" 
+
+    sleep 0.5
+    printf "If you want to use the default location, hit [Enter] again.\n"
+
+    read inst_dir
+
+    if test -n "$inst_dir"; then
+        sleep 0.5
+        printf "Thanks. After installation the script will be located in \"$inst_dir\".\n"
+    else
+        sleep 0.5
+        printf  "Thanks. After installation the script will be in the default location \"~/.config/vim-org\".\n\n"
+    fi
+
+    sleep 0.5
+    printf "Can we proceed with the installation? (y or n)\n"
+
+    while : 
+    do
+        read install
+        if [ $install = "y" ] || [ $install = "yes" ]; then
+            sleep 0.5
+            printf "\nOk. Did you used Vimwiki plugin early? (y or n)\n"
+            break
+        elif [ $install = "n" ] || [ $install = "no" ]; then
+            sleep 0.5
+            printf "\nAborting...\n"
+            sleep 0.5
+            exit
+        else
+            sleep 0.5
+            printf "\nPlease, type \"y\"/\"yes\" or \"n\"/\"no\".\n"
+            continue
+        fi
+    done
+
+    while : 
+    do
+        read vimwiki
+        if [ $vimwiki = "y" ] || [ $vimwiki = "yes" ]; then
+             printf "\nIn this case, in the end of the installation you will have to:\n"
+             sleep 0.5
+             printf "1. add org diretory as the path for the primary wiki in your vimrc file;\n"
+             sleep 0.5
+             printf "2. be sure that this wiki will be interpreted in Markdown syntax.\n\n"
+             sleep 0.5
+             printf "For example, you could add {'path':'org_dir','syntax':'markdown','ext':'.md'} in the beginning of your \"g:vimwiki_list\" array."
+             sleep 0.5
+             break
+        elif [ $vimwiki = "n" ] || [ $vimwiki = "no" ]; then
+             printf "No problem. In this case, the basic needed configuration will be made automatically."
+             sleep 0.5
+             break
+        else
+            printf "Please, type \"y/yes\" or \"n/no\".\n"
+            continue
+        fi
+    done
+ 
+    printf "\n\nContinuing with the installation...\n\n"
+    sleep 0.5
+
+    printf "defining subdirectories...\n"
+    install_dir=$inst_dir/install/
+    script_dir=$inst_dir/script/
+
+    printf "creating the installation directory...\n"
+    mkdir -p $inst_dir
+    cd $inst_dir
+
+    printf "defining the new variables...\n"
+    git clone ...
+    sed -i '4s/^/inst_dir=$inst_dir\n/' $script_dir/variables
+    sed -i '5s/^/org_dir=$org_dir\n/' $script_dir/variables
+    sed -i '6s/^/script_dir=$inst_dir/script\n/' $script_dir/variables
+
+    printf "adding the \"org\" function to the bash...\n"
+    source $install_dir/bashrc
+
+    if [ $vimwiki = "y" ] || [ $vimwiki = "yes" ]; then
+        break
+    elif [ $vimwiki = "n" ] || [ $vimwiki = "no" ]; then
+        sleep 0.5
+        printf "Configuring Vim-Org..."
+        source $install_dir/vimrc
+    fi
+        sleep 0.5
+        printf "Installation has been finished...\n\n"
+        sleep 0.5
+        printf "Open a new terminal window and type \"org -h\" or \"org --help\" for help.\n"
+        sleep 0.5
+        printf "For more details see the documentation in \"url\".\n"
+        exit   

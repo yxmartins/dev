@@ -1,0 +1,30 @@
+#! /bin/bash
+
+# Fast navigation with "."
+## use ". file" or ". $i"  to open the ith file 
+    function .() {
+        arr=($PWD/*)
+
+        if [[ -z $1 ]]; then
+            ls
+        elif [ -d "$1" ]; then 
+            cd $1 && ls
+        elif [ "${1##*.}" = "pdf" ]; then
+            zathura $1
+        elif [ -f "$1" ]; then
+            sudo vim -c startinsert $1
+        elif [[ "$1" =~ ^[0-9]+$ ]]; then
+            x=$(($1-1))
+            . ${arr[$x]}
+        fi
+    }
+## list hidden files with ".," or ",."
+    alias ,.="la"
+    alias .,="la"
+## use "~" to move to $HOME and list files
+    alias ~="cd ~/ && ls"
+## move to parent dirs with multiple dots
+    alias ..=" cd .. && ls"
+    alias ...=" cd .. && .. "
+    alias ....=" cd .. && cd .. && .."
+

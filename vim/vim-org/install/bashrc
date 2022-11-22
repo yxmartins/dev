@@ -1,0 +1,8 @@
+#! /bin/bash
+
+# add the "org function" to bashrc
+    printf "
+        if [ -f $script_dir/org ]; then
+        source $script_dir/org
+        fi
+        " >> ~/.bashrc 

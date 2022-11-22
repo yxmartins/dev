@@ -1,0 +1,6 @@
+# Transl-Script
+## quickly google translatation from terminal using Translate-Shell
+    if [ -f ~/.config/transl-script/transl-script.sh ]; then
+        .  ~/.config/transl-script/transl-script.sh
+    fi
+

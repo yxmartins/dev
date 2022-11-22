@@ -1,0 +1,124 @@
+#! /bin/bash
+
+# "mk" function.
+## "mk -d" to make a dir. "mk -f" to make a file.
+    function mk(){
+        if [[ "$1" == "-f" || "$1" == "--file" ]]; then
+            if [ -n $2 ]; then
+                touch $2
+            fi
+        elif [[ "$1" = "-d" || "$1" = "--dir" ]]; then
+            if [ -n $2 ]; then
+                mkdir $2
+            fi
+        fi
+    }
+
+## aliases
+    alias mkf="mk -f"
+    alias mkd="mk -d"
+
+    function + (){
+        mk -f $1
+        ls
+    }
+    function ++ (){
+         mk -d $1
+         ls
+    }
+
+# "rm" function
+
+     function del() {
+         if [[ -z $3 ]]; then
+             if [[ -z $2 ]]; then
+                 if [[ -z $1 ]]; then
+                    echo "no options defined".
+                 elif [[ "$1" == "-c" || "$1" == "--clean" ]]; then
+                    mv -i --backup=numbered $PWD/* ~/.trash/
+                    ls
+                    echo "the current directory was cleaned."
+                 elif [[ "$1" == "-d" || "$1" == "-f" ]]; then 
+                    echo "this option cannot be used with an empty variable."
+                 elif [[ "$1" == "-ch" ]]; then
+                    shopt -s dotglob
+                    mv -i --backup=numbered $PWD/* ~/.trash/
+                    ls
+                    echo "the current directory (including hidden files) was cleaned."
+                 elif
+                     [[ -d $1 || -f $1 ]]; then
+                     mv --backup=numbered $1 ~/.trash/
+                 fi
+             elif [[ "$2" == "-h" ]]; then
+                 if [[ -z $1 ]]; then
+                    printf "option \"-h\" cannot be used alone.\n"
+                 elif [[ "$1" = "-c" ]]; then
+                    shopt -s dotglob
+                     mv --backup=numbered $PWD/* ~/.trash/
+                 else
+                    echo "option not defined."
+                 fi
+             elif [[ -d $2 ]]; then
+                 if [[ -z $1 ]]; then
+                    mv --backup=numbered $PWD/$2 ~/.trash/
+                    printf "directory \"$2\" sent to trash." 
+                 elif [[ "$1" == "-d" || "$1" == "--dirs" ]]; then
+                    subfiles=( $PWD/$2/* )
+                    shopt -s globstar
+                    shopt -s nullglob
+                    for i in ${subfiles[@]}; do
+                        if [[ -d "$i" ]]; then
+                             mv --backup=numbered $i ~/.trash
+                             printf "directory \"$i\" sent to trash.\n"
+                         elif [[ -z "$i" ]]; then
+                            echo "no subdirectories to remove."
+                         fi
+                    done
+                 elif [[ "$1" = "-f" || "$1" == "--files" ]]; then
+                     subfiles=( $PWD/$2/* )
+                     shopt -s globstar
+                     shopt -s nullglob
+                     for i in ${subfiles[@]}; do
+                        if [ -f "$i" ]; then
+                            mv --backup=numbered $i ~/.trash
+                            printf "file \"$i\" sent to trash\n"
+                        fi
+                     done
+                  else
+                      echo "option not defined."
+                  fi
+             fi
+        elif [[ -d $3 ]]; then
+                if [[ "$2" == "-h" || "$2" == "--hidden" ]]; then 
+                    if [[ "$1" == "-d" || "$1" == "--dirs" ]]; then
+                        shopt -s dotglob
+                        rm $1 $2 $3
+                    elif [[ "$1" == "-f" || "$1" == "--file" ]]; then
+                        shopt -s dotglob
+                        rm $1 $2 $3
+                    else
+                        echo "option not defined."
+                    fi
+                fi
+        else
+            echo "option not defined."
+
+         fi
+     }
+
+## aliases
+
+    function -(){
+        del $1
+    }
+    function --(){
+        del -c $1
+    }
+    function -.(){
+        del -ch $1
+    }
+
+
+
+
+

@@ -1,0 +1,69 @@
+#! /bin/bash
+
+# include variables
+    source  ~/.config/vim-org/script/variables
+
+# for every file "f(m,d)" named by date, create tmp file "tmp(m,d)" using the template
+    for m in {1..12}; do
+        for d in {1..31}; do
+            if [ -f "$diary_dir/${datefile[$m,$d]}" ]; then
+                if [ -f "/tmp/${datefile[$m,$d]}" ]; then
+                    rm  /tmp/${datefile[$m,$d]}
+                fi
+
+               touch /tmp/${datefile[$m,$d]}
+
+                printf -- "--------------\n- [${date[$m,$d]}](${datefile[$m,$d]}) -\n-------------- \n\n" >> /tmp/${datefile[$m,$d]}
+                cat $diary_dir/${datefile[$m,$d]} >> /tmp/${datefile[$m,$d]}
+
+                printf -- "\n------------------------------------" >> /tmp/${datefile[$m,$d]}
+            fi
+        done
+    done
+
+# sort the template files "tmp(m,d)" decreasingly in "m" and "d"
+    declare -A tmp_m
+    declare -A tmp_d
+
+    for m in {1..12}; do
+        for d in {1..31}; do
+            if [ -f /tmp/${datefile[$m,$d]} ]; then
+                tmp_m[$m]=$m
+                tmp_d[$d]=$d
+            fi
+        done
+    done
+    
+    sudo rm -f /tmp/list_m.txt
+    sudo rm -f /tmp/list_d.txt
+    touch /tmp/list_m.txt
+    touch /tmp/list_d.txt
+
+    for m in ${tmp_m[@]}; do
+         echo "$m" >> /tmp/list_m.txt
+    done    
+    for d in ${tmp_d[@]}; do
+        echo "$d" >> /tmp/list_d.txt
+    done
+    
+    sudo rm -f /tmp/sort_m.txt
+    sudo rm -f /tmp/sort_d.txt
+    sudo sort -n -o /tmp/sort_m.txt /tmp/list_m.txt
+    sudo sort -n -o /tmp/sort_d.txt /tmp/list_d.txt
+
+    mapfile -t sort_m < /tmp/sort_m.txt
+    mapfile -t sort_d < /tmp/sort_d.txt
+
+# clean the diary and include the ordered files "tmp(m,d)".  
+    rm $diary
+    touch $diary
+
+    for m in ${sort_m[@]}; do
+        for d in ${sort_d[@]}; do
+            if [ -f /tmp/${datefile[$m,$d]} ]; then 
+        cat /tmp/${datefile[$m,$d]} >> $diary
+            fi
+        done
+    done
+
+

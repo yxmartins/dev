@@ -1,0 +1,34 @@
+#! /bin/bash
+
+# including variables
+    source ~/.config/vim-org/script/variables
+
+# defining the "org" function
+    function org() {
+        case $1 in 
+            --plan ) 
+                shift 1;
+                command bash $script_dir/planner;
+                command vim $diary;;
+            -p )
+                shift 1;
+                command bash $script_dir/planner;
+                command vim $diary;;
+            --calendar )
+                shift 1; command vim -c CalendarT;;
+            -c )
+                shift 1; command vim -c CalendarT;;
+            --todo )
+                shift 1; command vim $todo;;
+            -td )
+                shift 1; command vim $todo;;
+             --help )
+                shift 1; echo "to be added";;
+            -h )
+                shift 1; echo "to be added";;
+        esac
+        case $* in *) 
+            shift 1;  command vim $index;;
+        esac
+        }
+
