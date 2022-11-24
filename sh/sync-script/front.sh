@@ -33,9 +33,26 @@
 
     sf[2]=/home/yurixm/files/config/linux/bash/bashrc
     tf[2]=/home/yurixm/.bashrc_add
+
+    sf[3]=/home/yurixm/files/config/linux/openbox/lubuntu-rc.xml
+    tf[3]=/home/yurimx/.config/openbox/lubuntu-rc.xml
    
 ## define array of files indexes
-    Nf=(0 1 2)
+    Nf=(0 1 2 3)
+
+# Github/Gitlab mode
+## define the main directories
+    gd[0]=/home/yurixm/git/github/config
+    gd[1]=/home/yurixm/git/github/dev
+    gd[2]=/home/yurixm/git/github/personal
+
+## define the remotes
+    gr[0]="config"
+    gr[1]="dev"
+    gr[2]="personal"
+
+## define array of indexes for github/gitlab mode
+    Ng=(0 1 2)
 
 # declaring arrays
     declare -a sd
@@ -45,4 +62,7 @@
     declare -a sf
     declare -a tf
     declare -a Nf
+    declare -a gd
+    declare -a gr
+    declare -a Ng
 

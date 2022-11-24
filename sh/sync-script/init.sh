@@ -1,23 +1,18 @@
+#! /bin/bash
 
-# Sync
-sync --files
-sync --dir
+# including data
+    source  ~/files/nerd/dev/sh/sync-script/front.sh
+    source  ~/files/nerd/dev/sh/sync-script/sync-script.sh
 
-# Push - Github
-## org directory
-cd /home/yurixm/git/github/config
-add
-push config
-## research directory
-#cd /home/yurixm/git/github/research
-#add
-#push research
-## personal directory
-cd /home/yurixm/git/github/personal
-add
-push personal
-## dev directory
-cd /home/yurixm/git/github/dev
-add
-push dev
+# Sync files and dirs
+    sync -f
+    sync -dir
+
+# for every $i move to the directory td[$i] and then commit and push to github
+    for i in ${Ng[@]}; do
+        cd ${gd[$i]}
+        git add .
+        git commit -m "..."
+        git push ${gr[$i]} master
+    done
 

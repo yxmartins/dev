@@ -1,4 +1,4 @@
-
+#! /bin/bash
 
 # including data
     if [ -f ~/files/nerd/dev/sh/sync-script/front.sh ]; then
@@ -27,10 +27,23 @@
                         done ;;
                      --all | -a)
                         shift 1; sync -f; sync -d;;
-                esac
-                case $@ in @) 
-                    shift 1;  echo "alias not defined";;
-                esac
+                     --config | -c)
+                        echo "executing the config file...";;
+                     *)
+                        shift 1;  echo "alias not defined";;
+                  esac
+
+                  if [[ "$2" == "--github" || "$2" == "-gh" ]]; then
+                      case $1 in 
+                          --config | -c)
+                               echo "configuring in github mode";;
+                      esac
+                  elif [[ "$2" == "--gitlab" || "$2" == "-gl" ]]; then
+                      case $1 in
+                          --config | -c)
+                               echo "configuring in gitlab mode";;
+                      esac
+                  fi
              }
 
 # PUSH
@@ -48,26 +61,5 @@
 
 # START
 ## copy the script to /etc/init.d
-
-
-
-    function push() {
-        case $* in
-            config* ) shift 1; command git push config master;;
-        esac
-        case $* in
-            research* ) shift 1; command git push research master;;
-        esac
-        case $* in
-            personal* ) shift 1; command git push personal master;;
-        esac
-        case $* in
-            dev* ) shift 1; command git push dev master;;
-        esac
-
-        case $* in
-            *) shift 1;  echo "remote not defined";;
-        esac
-        }
 
 

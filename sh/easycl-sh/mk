@@ -106,17 +106,26 @@
          fi
      }
 
-## aliases
+## redefining "rm" function
+    function rm() {
+    if [[ -n  $1 ]]; then
+        printf "You are trying to delete \"$1\" permanently.\nAre you sure? (y/n)\n"
+        read x
+        if [[ "$x" == "y" || "$x" == "yes" ]]; then
+            sudo rm -r $1
+        elif [[ "$x" == "n" || "$x" == "no" ]]; then
+            return
+        else
+            echo "invalid option."
+        fi
+    else
+        return
+    fi
+    }
 
-    function -(){
-        del $1
-    }
-    function --(){
-        del -c $1
-    }
-    function -.(){
-        del -ch $1
-    }
+## aliases
+    alias d="del"
+    alias D="rm"
 
 
 
