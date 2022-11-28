@@ -18,15 +18,6 @@
     alias mkf="mk -f"
     alias mkd="mk -d"
 
-    function + (){
-        mk -f $1
-        ls
-    }
-    function ++ (){
-         mk -d $1
-         ls
-    }
-
 # "rm" function
 
      function del() {
@@ -108,24 +99,38 @@
 
 ## redefining "rm" function
     function rm() {
-    if [[ -n  $1 ]]; then
+    if [[ -n $1 && -n $2 ]]; then
+        printf "You are trying to delete \"$2\" permanently.\nAre you sure? (y/n)\n"
+        read x
+        if [[ "$x" == "y" || "$x" == "yes" ]]; then
+            sudo rm $1 $2
+        elif [[ "$x" == "n" || "$x" == "no" ]]; then
+            return
+        else
+            echo "invalid option."
+        fi
+    elif [[ -n $1 && -z $2 ]]; then
         printf "You are trying to delete \"$1\" permanently.\nAre you sure? (y/n)\n"
         read x
         if [[ "$x" == "y" || "$x" == "yes" ]]; then
-            sudo rm -r $1
+            sudo rm $1
         elif [[ "$x" == "n" || "$x" == "no" ]]; then
             return
         else
             echo "invalid option."
         fi
     else
-        return
+       return
     fi
     }
 
 ## aliases
-    alias d="del"
-    alias D="rm"
+    function d(){
+        del $1
+    }
+    function D(){
+        rm -r $1
+    }
 
 
 

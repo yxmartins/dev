@@ -35,7 +35,7 @@
     tf[2]=/home/yurixm/.bashrc_add
 
     sf[3]=/home/yurixm/files/config/linux/openbox/lubuntu-rc.xml
-    tf[3]=/home/yurimx/.config/openbox/lubuntu-rc.xml
+    tf[3]=/home/yurixm/.config/openbox/lubuntu-rc.xml
    
 ## define array of files indexes
     Nf=(0 1 2 3)
