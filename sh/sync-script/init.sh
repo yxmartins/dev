@@ -6,7 +6,7 @@
 
 # Sync files and dirs
     sync -f
-    sync -dir
+    sync -d
 
 # for every $i move to the directory td[$i] and then commit and push to github
     for i in ${Ng[@]}; do
