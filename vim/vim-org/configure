@@ -107,7 +107,7 @@
         source $install_dir/vimrc
     fi
         sleep 0.5
-        printf "Installation has been finished...\n\n"
+        printf "Installation finished...\n\n"
         sleep 0.5
         printf "Open a new terminal window and type \"org -h\" or \"org --help\" for help.\n"
         sleep 0.5
