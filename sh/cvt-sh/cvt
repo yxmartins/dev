@@ -1,0 +1,16 @@
+#! bin/bash
+
+# "cvt -md", "convert -md" to convert markdown to pdf using pandoc. 
+    function cvt(){
+    if [[ "$1" = "-md" ]] && [[ "$2" = "-pdf" ]]; then
+        name=$(basename "$3" .md)
+        pandoc --table-of-contents --number-sections -f markdown -t pdf -o $name.pdf $3
+    fi
+    }
+    function convert(){
+    if [[ "$1" = "-md" ]] && [[ "$2" = "-pdf" ]]; then
+        name=$(basename "$3" .md)
+        pandoc --table-of-contents --number-sections -f markdown -t pdf -o $name.pdf $3
+    fi
+    }
+
