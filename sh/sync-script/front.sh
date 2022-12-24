@@ -20,8 +20,13 @@
     td[4]=/home/yurixm/git/github/dev
     a[4]="dev"
 
+    sd[5]=/home/yurixm/.vim/
+    td[5]=/home/yurixm/git/github/personal/vim
+    a[5]="vim"
+
+
 ## define array of directory indexes
-    Nd=(0 1 2 3 4)
+    Nd=(0 1 2 3 4 5)
 
 # defining the FILES array
 ## for each i receive a pair of strings
@@ -41,7 +46,7 @@
     Nf=(0 1 2 3)
 
 # Github/Gitlab mode
-## define the main directories
+## define the top directories
     gd[0]=/home/yurixm/git/github/config
     gd[1]=/home/yurixm/git/github/dev
     gd[2]=/home/yurixm/git/github/personal
