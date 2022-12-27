@@ -3,14 +3,40 @@
 # "cvt -md", "convert -md" to convert markdown to pdf using pandoc. 
     function cvt(){
     if [[ "$1" = "-md" ]] && [[ "$2" = "-pdf" ]]; then
-        name=$(basename "$3" .md)
-        pandoc --table-of-contents --number-sections -f markdown -t pdf -o $name.pdf $3
+        if [[ "$3" = "-H" ]] || [[ "$3" = "-h" ]]; then
+            if [[ "$4" = "-M" ]] || [[ "$4" = "-m" ]] && [[ -n "$5" ]]; then
+                name=$(basename "$5" .md)
+                pandoc --table-of-contents --number-sections -f markdown -t pdf -H /home/yurixm/files/config/tex/preamble/basic.sty --metadata-file $name.yml  -o $name.pdf $5
+            elif [[ "$4" = "-M" ]] || [[ "$4" = "-m" ]] && [[ -z "$5" ]]; then
+                echo "please add a filename."
+            elif [[ -n "$4" ]] && [[ -z "$5" ]]; then 
+                name=$(basename "$4" .md)
+                pandoc --table-of-contents --number-sections -f markdown -t pdf -H /home/yurixm/files/config/tex/preamble/basic.sty -o $name.pdf $4
+            elif [[ -z "$4" ]] && [[ -z "$5" ]]; then
+                echo "please add a filename."
+            fi
+        elif [[ -z "$3" ]]; then
+            echo "please add a filename."
+        else
+            name=$(basename "$3" .md)
+            pandoc --table-of-contents --number-sections -f markdown -t pdf -o $name.pdf $3
+        fi
+    else
+        echo "option not defined."
     fi
     }
+
     function convert(){
     if [[ "$1" = "-md" ]] && [[ "$2" = "-pdf" ]]; then
         name=$(basename "$3" .md)
         pandoc --table-of-contents --number-sections -f markdown -t pdf -o $name.pdf $3
+    elif  [[ "$1" = "-md" ]] && [[ "$2" = "-pdf" ]] && [[ "$3" = "-H" ]]; then
+        name=$(basename "$4" .md)
+        pandoc --table-of-contents --number-sections -f markdown -t pdf -H /home/yurixm/files/config/tex/preamble/basic.sty -o $name.pdf $4
+    elif  [[ "$1" = "-md" ]] && [[ "$2" = "-pdf" ]] && [[ "$3" = "-H" ]] && [[ "$4" = "-m" ]]; then
+        name=$(basename "$5" .md)
+        pandoc --table-of-contents --number-sections -f markdown -t pdf -H /home/yurixm/files/config/tex/preamble/basic.sty --metadata-file $name.yml  -o $name.pdf $5
     fi
-    }
+
+    }      
 
