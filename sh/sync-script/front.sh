@@ -2,31 +2,38 @@
 ## for each i obtain a triple of strings
     sd[0]=/home/yurixm/files/me/org/
     td[0]=/home/yurixm/git/github/personal/org
-    a[0]="org"
+    a[0]="org_git"
 
     sd[1]=/home/yurixm/files/math/
     td[1]=/home/yurixm/git/github/personal/math
-    a[1]="math"
+    a[1]="math_git"
 
     sd[2]=/home/yurixm/files/edu/
     td[2]=/home/yurixm/git/github/personal/edu
-    a[2]="edu"
+    a[2]="edu_git"
 
     sd[3]=/home/yurixm/files/config/
     td[3]=/home/yurixm/git/github/config
-    a[3]="config"
+    a[3]="config_git"
 
     sd[4]=/home/yurixm/files/nerd/dev/
     td[4]=/home/yurixm/git/github/dev
-    a[4]="dev"
+    a[4]="dev_git"
 
     sd[5]=/home/yurixm/.vim/
     td[5]=/home/yurixm/git/github/personal/vim
-    a[5]="vim"
+    a[5]="vim_git"
 
+    sd[6]=/home/yurixm/files/config/linux/mutt/
+    td[6]=/home/yurixm/.mutt/
+    a[6]="mutt"
 
+    sd[7]=/home/yurixm/files/config/linux/mutt/
+    td[7]=/home/yurixm/git/github/config/mutt/
+    a[7]="mutt_git"
+   
 ## define array of directory indexes
-    Nd=(0 1 2 3 4 5)
+    Nd=(0 1 2 3 4 5 6 7)
 
 # defining the FILES array
 ## for each i receive a pair of strings
