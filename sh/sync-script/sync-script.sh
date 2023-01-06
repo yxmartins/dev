@@ -46,6 +46,10 @@
                   fi
              }
 
+    alias syncf="sync -f"
+    alias syncd="sync -d"
+    alias synca="sync -a"
+
 # PUSH
 ## define "sync-add"
     alias add="git add . && git commit -m "...""

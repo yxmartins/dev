@@ -1,0 +1,15 @@
+#! /bin/bash/
+
+# setup inicial: "./install"
+# - install mutt ?
+# - create ~/.mutt with the basic files.
+# - create ".logins" file
+# - create accounts dir and files
+# - create muttrc
+# - restrict access of ".logins" file.
+
+# features:
+# - criar e deletar accounts via command line
+# - mudar esquema de cores via command line 
+
+

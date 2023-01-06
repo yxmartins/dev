@@ -1,0 +1,50 @@
+#! /bin/bash/
+
+# array of number of accounts (will play the role of defining ordering)
+#
+    Ord = (1 2)
+    acc = (a1 a2)
+
+# for every $i in $acc, list of login data
+
+    email[${acc[1]}] = "email_1"
+    pass[${acc[1]}] = "pass_1"
+    name[${acc[1]}] = "name_1"
+    imap[${acc[1]}] = "imap_1"
+    smtp[${acc[1]}] = "smtp_1"
+    imap_port[${acc[1]}] = "imap_port_1"
+    smtp_port[${acc[1]}] = "smtp_port_1"
+
+    email[${acc[2]}] = "email_2"
+    pass[${acc[2]}] = "pass_2"
+    name[${acc[2]}] = "name_2"
+    imap[${acc[2]}] = "imap_2"
+    smtp[${acc[2]}] = "smtp_2"
+    imap_port[${acc[2]}] = "imap_port_2"
+    smtp_port[${acc[2]}] = "smtp_port_2"
+
+# for every $i in $acc, define login_$i as the ith block of login configuration
+
+    for i in ${!acc[@]}; do
+        login_$i[1] = "email[${acc[$i]}]"
+        login_$i[2] = "pass[${acc[$i]}]"
+        login_$i[3] = "name[${acc[$i]}]"
+        login_$i[4] = "imap[${acc[$i]}]"
+        login_$i[5] = "smtp[${acc[$i]}]"
+        login_$i[6] = "imap_port[${acc[$i]}]"
+        login_$i[7] =  "my_smtp_port[${acc[$i]}]" 
+    done
+
+# define login[i,j] as the matrix of login configuration
+
+    Nl = (1 2 3 4 5 6 7 )
+
+    for i in ${!acc[@]}; do
+      for j in ${!Nl[@]}; do
+        login[i,j]=${login_$i[$j]}
+      done
+    done
+
+
+
+

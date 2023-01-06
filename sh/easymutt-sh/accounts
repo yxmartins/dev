@@ -1,0 +1,12 @@
+#! /bin/bash/
+
+ source front
+
+    for i in ${!acc[@]}; do
+        printf = "
+        my_email_${acc[$i]} = \"${email[${acc[$i]}]} 
+
+        (...)
+
+        " > ~/.mutt/login
+    done
